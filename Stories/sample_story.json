@@ -1,0 +1,102 @@
+{
+    "id": "sample-mystery",
+    "title": "The Last Night at Blackwood Manor",
+    "description": "A detective investigates a mysterious disappearance at an isolated mansion.",
+    "start_scene": "arrival",
+    "scenes": {
+        "arrival": {
+            "title": "The Arrival",
+            "text": "Rain crashes against the windows of Blackwood Manor. You have been called to investigate the disappearance of Lord Blackwood. The front door is unlocked, and the house is strangely silent. Where will you investigate first?",
+            "choices": [
+                {
+                    "label": "Examine the library",
+                    "target_scene": "library"
+                },
+                {
+                    "label": "Inspect the hallway",
+                    "target_scene": "hallway"
+                }
+            ],
+            "ending": false
+        },
+        "library": {
+            "title": "The Library",
+            "text": "The library smells of smoke. A fireplace is still warm, and you notice a torn piece of paper beneath the desk. It contains a message: 'Meet me at midnight. Come alone.'",
+            "choices": [
+                {
+                    "label": "Search the desk",
+                    "target_scene": "desk"
+                },
+                {
+                    "label": "Return to the hallway",
+                    "target_scene": "hallway"
+                }
+            ],
+            "ending": false
+        },
+        "hallway": {
+            "title": "The Hallway",
+            "text": "A muddy footprint leads toward a locked room. Nearby, you find a silver key hidden beneath a small table.",
+            "choices": [
+                {
+                    "label": "Use the key on the locked room",
+                    "target_scene": "locked_room"
+                },
+                {
+                    "label": "Return to the library",
+                    "target_scene": "library"
+                }
+            ],
+            "ending": false
+        },
+        "desk": {
+            "title": "The Hidden Letter",
+            "text": "Inside the desk, you discover a letter signed by the mansion's caretaker. It reveals that Lord Blackwood planned to leave the estate that night.",
+            "choices": [
+                {
+                    "label": "Confront the caretaker",
+                    "target_scene": "reveal"
+                }
+            ],
+            "ending": false
+        },
+        "locked_room": {
+            "title": "The Locked Room",
+            "text": "The room contains a broken window and a muddy coat. A note on the floor reads: 'The truth is buried where the roses grow.' You begin to suspect that someone helped Lord Blackwood escape.",
+            "choices": [
+                {
+                    "label": "Follow the evidence to the garden",
+                    "target_scene": "reveal"
+                }
+            ],
+            "ending": false
+        },
+        "reveal": {
+            "title": "The Final Revelation",
+            "text": "In the garden, you discover the caretaker waiting beside the rose bushes. He admits that Lord Blackwood staged his disappearance to escape a dangerous debt. But the caretaker offers you a choice: reveal the truth or let Lord Blackwood disappear forever.",
+            "choices": [
+                {
+                    "label": "Report the truth to the police",
+                    "target_scene": "ending_truth"
+                },
+                {
+                    "label": "Keep the secret",
+                    "target_scene": "ending_secret"
+                }
+            ],
+            "ending": false
+        },
+        "ending_truth": {
+            "title": "Ending: The Truth Revealed",
+            "text": "You report your findings to the police. The investigation becomes public, and Lord Blackwood is eventually found. The mystery is solved, but the manor will never be the same.",
+            "choices": [],
+            "ending": true
+        },
+        "ending_secret": {
+            "title": "Ending: The Secret Kept",
+            "text": "You decide to protect the caretaker's secret. By sunrise, Blackwood Manor is empty. The case is officially closed, but you know the real story will remain hidden.",
+            "choices": [],
+            "ending": true
+        }
+    }
+}
