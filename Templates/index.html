@@ -1,0 +1,45 @@
+
+{% extends "base.html" %}
+
+{% block title %}StoryForge | Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">YOUR NEXT MYSTERY BEGINS HERE</p>
+    <h1>Every choice tells<br>a different story.</h1>
+    <p class="hero-description">
+        Create mysterious worlds, uncover hidden secrets,
+        and explore stories where every decision matters.
+    </p>
+
+    <div class="hero-actions">
+        <a href="{{ url_for('library') }}" class="button button-primary">Explore Stories</a>
+        <form action="{{ url_for('new_story') }}" method="POST">
+            <button class="button button-secondary" type="submit">Create a Story</button>
+        </form>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">DISCOVER</p>
+            <h2>Featured Mysteries</h2>
+        </div>
+        <a href="{{ url_for('library') }}" class="text-link">View all stories →</a>
+    </div>
+
+    <div class="story-grid">
+        {% for story in stories %}
+        <article class="story-card">
+            <div class="card-symbol">CASE {{ loop.index }}</div>
+            <h3>{{ story.title }}</h3>
+            <p>{{ story.description }}</p>
+            <a href="{{ url_for('play_story', story_id=story.id) }}" class="text-link">Read Story →</a>
+        </article>
+        {% else %}
+        <p class="empty-message">No stories yet. Create your first mystery!</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

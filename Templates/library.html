@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+
+{% block title %}StoryForge | Library{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <p class="eyebrow">THE ARCHIVE</p>
+    <h1>Story Library</h1>
+    <p>Choose a case and discover where its clues will lead.</p>
+</section>
+
+<div class="section-heading">
+    <h2>All Mysteries</h2>
+    <form action="{{ url_for('new_story') }}" method="POST">
+        <button type="submit" class="button button-primary">+ New Story</button>
+    </form>
+</div>
+
+<div class="story-grid">
+    {% for story in stories %}
+    <article class="story-card">
+        <div class="card-symbol">CASE {{ loop.index }}</div>
+        <h3>{{ story.title }}</h3>
+        <p>{{ story.description }}</p>
+        <div class="card-actions">
+            <a href="{{ url_for('play_story', story_id=story.id) }}" class="text-link">Play →</a>
+            <a href="{{ url_for('edit_story', story_id=story.id) }}" class="text-link">Edit →</a>
+        </div>
+    </article>
+    {% else %}
+    <p class="empty-message">Your archive is empty. Create your first story.</p>
+    {% endfor %}
+</div>
+{% endblock %}

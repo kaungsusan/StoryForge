@@ -20,16 +20,18 @@ def load_stories():
 
 
 def get_story(story_id):
-    file_path = STORIES_DIR / f"{story_id}.json"
+    for file_path in STORIES_DIR.glob("*.json"):
+        try:
+            with file_path.open("r", encoding="utf-8") as file:
+                story = json.load(file)
 
-    if not file_path.exists():
-        return None
+            if story.get("id") == story_id:
+                return story
 
-    try:
-        with file_path.open("r", encoding="utf-8") as file:
-            return json.load(file)
-    except (json.JSONDecodeError, OSError):
-        return None
+        except (json.JSONDecodeError, OSError):
+            continue
+
+    return None
 
 
 def save_story(story):

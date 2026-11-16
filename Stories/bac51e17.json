@@ -1,0 +1,14 @@
+{
+    "description": "A new mystery waiting to be written.",
+    "id": "bac51e17",
+    "scenes": {
+        "start": {
+            "choices": [],
+            "ending": true,
+            "text": "Your mystery begins here.",
+            "title": "The Beginning"
+        }
+    },
+    "start_scene": "start",
+    "title": "Untitled Mystery"
+}

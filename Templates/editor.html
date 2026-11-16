@@ -1,0 +1,40 @@
+
+{% extends "base.html" %}
+
+{% block title %}StoryForge | Editor{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <p class="eyebrow">STORY WORKSHOP</p>
+    <h1>Story Editor</h1>
+    <p>Build your mystery one scene at a time.</p>
+</section>
+
+<section class="editor-panel">
+    <input type="hidden" id="story-id" value="{{ story.id }}">
+
+    <label for="story-title">Story Title</label>
+    <input type="text" id="story-title" value="{{ story.title }}">
+
+    <label for="story-description">Description</label>
+    <textarea id="story-description" rows="3">{{ story.description }}</textarea>
+
+    <div class="section-heading">
+        <h2>Scenes</h2>
+        <button type="button" class="button button-secondary" id="add-scene">+ Add Scene</button>
+    </div>
+
+    <div id="scene-list"></div>
+
+    <div class="editor-actions">
+        <button type="button" class="button button-primary" id="save-story">Save Story</button>
+        <button type="button" class="button button-secondary" id="validate-story">Check Story</button>
+        <a href="{{ url_for('play_story', story_id=story.id) }}" class="button button-secondary">Play Story</a>
+    </div>
+
+    <div id="editor-message" class="message" aria-live="polite"></div>
+    <div id="validation-results"></div>
+</section>
+
+<script id="story-data" type="application/json">{{ story|tojson }}</script>
+{% endblock %}

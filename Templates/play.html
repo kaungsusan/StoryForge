@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+
+{% block title %}StoryForge | {{ story.title }}{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <p class="eyebrow">INTERACTIVE MYSTERY</p>
+    <h1>{{ story.title }}</h1>
+    <p>{{ story.description }}</p>
+</section>
+
+
+<section class="play-panel">
+    <div id="resume-prompt" class="resume-prompt" hidden>
+        <h2>Welcome Back, Detective</h2>
+        <p>We found your previous reading progress.</p>
+        <div class="hero-actions">
+            <button type="button" id="resume-progress" class="button button-primary">Continue Reading</button>
+            <button type="button" id="start-over" class="button button-secondary">Start Over</button>
+        </div>
+    </div>
+
+    <div class="scene-number" id="scene-number"></div>
+    <h2 id="scene-title"></h2>
+    <p id="scene-text"></p>
+    <div id="scene-choices" class="choice-list"></div>
+    <button type="button" id="restart-story" class="button button-secondary">Restart Story</button>
+</section>
+
+
+<script id="play-story-data" type="application/json">{{ story|tojson }}</script>
+{% endblock %}

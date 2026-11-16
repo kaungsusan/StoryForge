@@ -1,0 +1,13 @@
+
+{% extends "base.html" %}
+
+{% block title %}StoryForge | Not Found{% endblock %}
+
+{% block content %}
+<section class="error-panel">
+    <p class="eyebrow">CASE NOT FOUND</p>
+    <h1>404</h1>
+    <p>The page you're looking for has disappeared.</p>
+    <a href="{{ url_for('index') }}" class="button button-primary">Return Home</a>
+</section>
+{% endblock %}
