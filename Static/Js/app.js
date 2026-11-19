@@ -23,13 +23,24 @@ function initializeEditor() {
     const story = JSON.parse(storyData.textContent);
     const titleInput = document.getElementById("story-title");
     const descriptionInput = document.getElementById("story-description");
-    const scenesContainer = document.getElementById("scenes-container");
+    const scenesContainer = document.getElementById("scene-list");
     const addSceneButton = document.getElementById("add-scene");
     const saveButton = document.getElementById("save-story");
     const validateButton = document.getElementById("validate-story");
-    const validationResult = document.getElementById("validation-result");
+    const validationResults = document.getElementById("validation-results");
+    const messageElement = document.getElementById("editor-message");
 
-    if (!scenesContainer || !addSceneButton || !saveButton) {
+    if (
+        !titleInput ||
+        !descriptionInput ||
+        !scenesContainer ||
+        !addSceneButton ||
+        !saveButton ||
+        !validateButton ||
+        !validationResults ||
+        !messageElement
+    ) {
+        console.error("Some editor elements are missing.");
         return;
     }
 
@@ -39,21 +50,27 @@ function initializeEditor() {
         Object.entries(story.scenes).forEach(([sceneId, scene]) => {
             const panel = createElement("div", "editor-panel");
             const heading = createElement("h3", "", sceneId);
-            const title = document.createElement("input");
-            const text = document.createElement("textarea");
-            const endingLabel = createElement("label");
-            const ending = document.createElement("input");
-            const choicesContainer = createElement("div", "choices-editor");
 
+            const title = document.createElement("input");
+            title.type = "text";
             title.value = scene.title || "";
             title.placeholder = "Scene title";
+
+            const text = document.createElement("textarea");
             text.value = scene.text || "";
             text.placeholder = "Write your scene...";
             text.rows = 5;
+
+            const endingLabel = createElement("label");
+            const ending = document.createElement("input");
+
             ending.type = "checkbox";
             ending.checked = Boolean(scene.ending);
 
-            endingLabel.append(ending, document.createTextNode(" Ending scene"));
+            endingLabel.append(
+                ending,
+                document.createTextNode(" Ending scene")
+            );
 
             title.addEventListener("input", () => {
                 scene.title = title.value;
@@ -68,30 +85,30 @@ function initializeEditor() {
             });
 
             const choicesHeading = createElement("h4", "", "Choices");
-            const addChoiceButton = createElement("button", "button button-secondary", "Add Choice");
+            const choicesContainer = createElement("div", "choices-editor");
 
-            addChoiceButton.type = "button";
+            scene.choices = scene.choices || [];
 
-            addChoiceButton.addEventListener("click", () => {
-                scene.choices = scene.choices || [];
-                scene.choices.push({
-                    label: "New choice",
-                    target_scene: ""
-                });
-                renderScenes();
-            });
-
-            (scene.choices || []).forEach((choice, index) => {
+            scene.choices.forEach((choice, index) => {
                 const choicePanel = createElement("div", "choice-editor");
-                const label = document.createElement("input");
-                const target = document.createElement("input");
-                const removeChoice = createElement("button", "button button-secondary", "Remove");
 
+                const label = document.createElement("input");
+                label.type = "text";
                 label.value = choice.label || "";
                 label.placeholder = "Choice text";
+
+                const target = document.createElement("input");
+                target.type = "text";
                 target.value = choice.target_scene || "";
                 target.placeholder = "Target scene ID";
-                removeChoice.type = "button";
+
+                const removeChoiceButton = createElement(
+                    "button",
+                    "button button-secondary",
+                    "Remove Choice"
+                );
+
+                removeChoiceButton.type = "button";
 
                 label.addEventListener("input", () => {
                     choice.label = label.value;
@@ -101,16 +118,43 @@ function initializeEditor() {
                     choice.target_scene = target.value.trim();
                 });
 
-                removeChoice.addEventListener("click", () => {
+                removeChoiceButton.addEventListener("click", () => {
                     scene.choices.splice(index, 1);
                     renderScenes();
                 });
 
-                choicePanel.append(label, target, removeChoice);
+                choicePanel.append(
+                    label,
+                    target,
+                    removeChoiceButton
+                );
+
                 choicesContainer.appendChild(choicePanel);
             });
 
-            const removeSceneButton = createElement("button", "button button-secondary", "Remove Scene");
+            const addChoiceButton = createElement(
+                "button",
+                "button button-secondary",
+                "Add Choice"
+            );
+
+            addChoiceButton.type = "button";
+
+            addChoiceButton.addEventListener("click", () => {
+                scene.choices.push({
+                    label: "New choice",
+                    target_scene: ""
+                });
+
+                renderScenes();
+            });
+
+            const removeSceneButton = createElement(
+                "button",
+                "button button-secondary",
+                "Remove Scene"
+            );
+
             removeSceneButton.type = "button";
 
             removeSceneButton.addEventListener("click", () => {
@@ -119,7 +163,7 @@ function initializeEditor() {
                     return;
                 }
 
-                if (!confirm("Remove this scene?")) {
+                if (!confirm("Are you sure you want to remove this scene?")) {
                     return;
                 }
 
@@ -136,7 +180,9 @@ function initializeEditor() {
 
             panel.append(
                 heading,
+                createElement("label", "", "Scene Title"),
                 title,
+                createElement("label", "", "Scene Text"),
                 text,
                 endingLabel,
                 choicesHeading,
@@ -147,6 +193,40 @@ function initializeEditor() {
 
             scenesContainer.appendChild(panel);
         });
+    }
+
+    function updateStoryInformation() {
+        story.title = titleInput.value.trim();
+        story.description = descriptionInput.value.trim();
+    }
+
+    async function saveStory(showMessage = true) {
+        updateStoryInformation();
+
+        try {
+            const response = await fetch(`/story/${story.id}/save`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(story)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || "Unable to save story.");
+            }
+
+            if (showMessage) {
+                messageElement.textContent = "Story saved successfully!";
+            }
+
+            return true;
+        } catch (error) {
+            messageElement.textContent = error.message;
+            return false;
+        }
     }
 
     addSceneButton.addEventListener("click", () => {
@@ -164,59 +244,73 @@ function initializeEditor() {
         };
 
         renderScenes();
+        messageElement.textContent = "New scene added.";
     });
 
     saveButton.addEventListener("click", async () => {
-        story.title = titleInput.value.trim();
-        story.description = descriptionInput.value.trim();
+        messageElement.textContent = "Saving story...";
+        await saveStory();
+    });
+
+    validateButton.addEventListener("click", async () => {
+        validationResults.replaceChildren();
+        messageElement.textContent = "Checking story...";
+
+        const saved = await saveStory(false);
+
+        if (!saved) {
+            return;
+        }
 
         try {
-            const response = await fetch(`/story/${story.id}/save`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(story)
-            });
-
+            const response = await fetch(`/story/${story.id}/validate`);
             const result = await response.json();
 
             if (!response.ok) {
-                throw new Error(result.error || "Unable to save story.");
+                throw new Error("Unable to validate story.");
             }
 
-            alert("Story saved successfully.");
-        } catch (error) {
-            alert(error.message);
-        }
-    });
+            validationResults.replaceChildren();
 
-    if (validateButton && validationResult) {
-        validateButton.addEventListener("click", async () => {
-            try {
-                const response = await fetch(`/story/${story.id}/validate`);
-                const result = await response.json();
-
-                validationResult.replaceChildren();
+            if (result.errors.length > 0) {
+                validationResults.appendChild(
+                    createElement("h3", "", "Errors")
+                );
 
                 result.errors.forEach(error => {
-                    validationResult.appendChild(createElement("p", "error-message", error));
+                    validationResults.appendChild(
+                        createElement("p", "error-message", error)
+                    );
                 });
+            }
+
+            if (result.warnings.length > 0) {
+                validationResults.appendChild(
+                    createElement("h3", "", "Warnings")
+                );
 
                 result.warnings.forEach(warning => {
-                    validationResult.appendChild(createElement("p", "warning-message", warning));
-                });
-
-                if (!result.errors.length && !result.warnings.length) {
-                    validationResult.appendChild(
-                        createElement("p", "success-message", "Your story looks good!")
+                    validationResults.appendChild(
+                        createElement("p", "warning-message", warning)
                     );
-                }
-            } catch (error) {
-                validationResult.textContent = "Unable to validate story.";
+                });
             }
-        });
-    }
+
+            if (!result.errors.length && !result.warnings.length) {
+                validationResults.appendChild(
+                    createElement(
+                        "p",
+                        "success-message",
+                        "Your story looks good!"
+                    )
+                );
+            }
+
+            messageElement.textContent = "Story validation completed.";
+        } catch (error) {
+            messageElement.textContent = error.message;
+        }
+    });
 
     renderScenes();
 }
@@ -258,7 +352,7 @@ function initializePlayer() {
         !choicesElement ||
         !restartButton
     ) {
-        console.error("A required story player element is missing.");
+        console.error("Required story player elements are missing.");
         return;
     }
 
@@ -268,10 +362,13 @@ function initializePlayer() {
     let visitedScenes = [];
 
     function saveProgress() {
-        localStorage.setItem(progressKey, JSON.stringify({
-            current_scene: currentScene,
-            visited_scenes: visitedScenes
-        }));
+        localStorage.setItem(
+            progressKey,
+            JSON.stringify({
+                current_scene: currentScene,
+                visited_scenes: visitedScenes
+            })
+        );
     }
 
     function showScene(sceneId) {
@@ -303,7 +400,12 @@ function initializePlayer() {
         }
 
         (scene.choices || []).forEach(choice => {
-            const button = createElement("button", "choice-button", choice.label);
+            const button = createElement(
+                "button",
+                "choice-button",
+                choice.label
+            );
+
             button.type = "button";
 
             button.addEventListener("click", () => {
@@ -329,7 +431,9 @@ function initializePlayer() {
         let savedProgress = null;
 
         try {
-            savedProgress = JSON.parse(localStorage.getItem(progressKey));
+            savedProgress = JSON.parse(
+                localStorage.getItem(progressKey)
+            );
         } catch (error) {
             localStorage.removeItem(progressKey);
         }
@@ -343,7 +447,10 @@ function initializePlayer() {
                 sceneId => story.scenes[sceneId]
             );
 
-            if (visitedScenes[visitedScenes.length - 1] === savedProgress.current_scene) {
+            if (
+                visitedScenes[visitedScenes.length - 1] ===
+                savedProgress.current_scene
+            ) {
                 visitedScenes.pop();
             }
 
@@ -370,7 +477,9 @@ function initializePlayer() {
     let savedProgress = null;
 
     try {
-        savedProgress = JSON.parse(localStorage.getItem(progressKey));
+        savedProgress = JSON.parse(
+            localStorage.getItem(progressKey)
+        );
     } catch (error) {
         localStorage.removeItem(progressKey);
     }

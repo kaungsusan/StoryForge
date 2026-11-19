@@ -1,3 +1,4 @@
+
 import json
 from pathlib import Path
 from uuid import uuid4
@@ -68,6 +69,22 @@ def create_story():
     }
 
     return save_story(story)
+
+
+def delete_story(story_id):
+    for file_path in STORIES_DIR.glob("*.json"):
+        try:
+            with file_path.open("r", encoding="utf-8") as file:
+                story = json.load(file)
+
+            if story.get("id") == story_id:
+                file_path.unlink()
+                return True
+
+        except (json.JSONDecodeError, OSError):
+            continue
+
+    return False
 
 
 def validate_story(story):

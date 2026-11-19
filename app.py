@@ -1,7 +1,9 @@
+
 from flask import Flask, abort, jsonify, redirect, render_template, request, url_for
 
 from story_engine import (
     create_story,
+    delete_story,
     get_story,
     load_stories,
     save_story,
@@ -74,6 +76,16 @@ def validate_story_route(story_id):
 
     result = validate_story(story)
     return jsonify(result)
+
+
+@app.route("/story/<story_id>/delete", methods=["POST"])
+def delete_story_route(story_id):
+    deleted = delete_story(story_id)
+
+    if not deleted:
+        abort(404)
+
+    return redirect(url_for("library"))
 
 
 @app.errorhandler(404)

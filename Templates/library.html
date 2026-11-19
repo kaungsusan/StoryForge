@@ -4,32 +4,94 @@
 {% block title %}StoryForge | Library{% endblock %}
 
 {% block content %}
-<section class="page-heading">
-    <p class="eyebrow">THE ARCHIVE</p>
-    <h1>Story Library</h1>
-    <p>Choose a case and discover where its clues will lead.</p>
+<section class="library-hero">
+    <div>
+        <p class="eyebrow">THE STORY ARCHIVE</p>
+        <h1>Every mystery has a story.</h1>
+        <p class="library-intro">
+            Explore your collection of mysteries, revisit old cases,
+            or create a new world filled with secrets.
+        </p>
+    </div>
+
+    <div class="library-decoration" aria-hidden="true">
+        <span>ARCHIVE</span>
+        <strong>SF</strong>
+        <span>EST. 2026</span>
+    </div>
 </section>
 
-<div class="section-heading">
-    <h2>All Mysteries</h2>
-    <form action="{{ url_for('new_story') }}" method="POST">
-        <button type="submit" class="button button-primary">+ New Story</button>
-    </form>
-</div>
-
-<div class="story-grid">
-    {% for story in stories %}
-    <article class="story-card">
-        <div class="card-symbol">CASE {{ loop.index }}</div>
-        <h3>{{ story.title }}</h3>
-        <p>{{ story.description }}</p>
-        <div class="card-actions">
-            <a href="{{ url_for('play_story', story_id=story.id) }}" class="text-link">Play →</a>
-            <a href="{{ url_for('edit_story', story_id=story.id) }}" class="text-link">Edit →</a>
+<section class="library-section">
+    <div class="library-toolbar">
+        <div>
+            <p class="eyebrow">YOUR COLLECTION</p>
+            <h2>All Mysteries</h2>
+            <p class="library-count">
+                {{ stories|length }} 
+                {% if stories|length == 1 %}case{% else %}cases{% endif %}
+                in your archive
+            </p>
         </div>
-    </article>
-    {% else %}
-    <p class="empty-message">Your archive is empty. Create your first story.</p>
-    {% endfor %}
-</div>
+
+        <form action="{{ url_for('new_story') }}" method="POST">
+            <button type="submit" class="button button-primary">
+                + Create New Story
+            </button>
+        </form>
+    </div>
+
+    <div class="story-grid library-grid">
+        {% for story in stories %}
+        <article class="story-card library-card">
+            <div class="card-top">
+                <span class="card-symbol">CASE {{ loop.index }}</span>
+                <span class="card-dot"></span>
+            </div>
+
+            <div class="library-card-content">
+                <h3>{{ story.title }}</h3>
+                <p>{{ story.description }}</p>
+            </div>
+
+            <div class="card-actions">
+                <a href="{{ url_for('play_story', story_id=story.id) }}"
+                   class="library-action play-action">
+                    Play Story →
+                </a>
+
+                <a href="{{ url_for('edit_story', story_id=story.id) }}"
+                   class="library-action">
+                    Edit
+                </a>
+
+                <form
+                    action="{{ url_for('delete_story_route', story_id=story.id) }}"
+                    method="POST"
+                    onsubmit="return confirm('Are you sure you want to delete this story? This action cannot be undone.');"
+                >
+                    <button type="submit" class="library-action delete-action">
+                        Delete
+                    </button>
+                </form>
+            </div>
+        </article>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-symbol">?</div>
+            <p class="eyebrow">NOTHING HERE YET</p>
+            <h3>Your archive is waiting.</h3>
+            <p>
+                Your next mystery starts with an idea.
+                Create your first story and bring it to life.
+            </p>
+
+            <form action="{{ url_for('new_story') }}" method="POST">
+                <button type="submit" class="button button-primary">
+                    Create Your First Story
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

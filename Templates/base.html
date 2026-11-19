@@ -4,16 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0b14">
+    <meta name="description" content="StoryForge is an interactive mystery story creator. Write branching mysteries, make choices, and discover different endings.">
     <title>{% block title %}StoryForge{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
 </head>
 <body>
     <header class="site-header">
-        <a href="{{ url_for('index') }}" class="logo">STORY<span>FORGE</span></a>
+        <a href="{{ url_for('index') }}" class="logo">
+            STORY<span>FORGE</span>
+            <small>CREATE YOUR OWN MYSTERY</small>
+        </a>
+
         <nav>
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('library') }}">Story Library</a>
+            <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}aria-current="page"{% endif %}>Home</a>
+            <a href="{{ url_for('library') }}" {% if request.endpoint == 'library' %}aria-current="page"{% endif %}>Story Library</a>
         </nav>
     </header>
 
@@ -22,7 +28,10 @@
     </main>
 
     <footer class="site-footer">
-        <p>STORYFORGE · Every choice creates a new mystery.</p>
+        <a href="{{ url_for('index') }}" class="footer-brand">STORY<span>FORGE</span></a>
+        <p>Every choice creates a new mystery.</p>
+        <div class="footer-divider"></div>
+        <p class="footer-copyright">A home for stories waiting to be discovered.</p>
     </footer>
 </body>
 </html>

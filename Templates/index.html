@@ -5,40 +5,87 @@
 
 {% block content %}
 <section class="hero">
-    <p class="eyebrow">YOUR NEXT MYSTERY BEGINS HERE</p>
-    <h1>Every choice tells<br>a different story.</h1>
-    <p class="hero-description">
-        Create mysterious worlds, uncover hidden secrets,
-        and explore stories where every decision matters.
-    </p>
+    <div class="hero-content">
+        <p class="eyebrow">THE WORLD IS YOURS TO UNRAVEL</p>
 
-    <div class="hero-actions">
-        <a href="{{ url_for('library') }}" class="button button-primary">Explore Stories</a>
-        <form action="{{ url_for('new_story') }}" method="POST">
-            <button class="button button-secondary" type="submit">Create a Story</button>
-        </form>
+        <h1>
+            Every choice tells
+            <span>a different story.</span>
+        </h1>
+
+        <p class="hero-description">
+            Create mysterious worlds, uncover hidden secrets,
+            and explore stories where every decision matters.
+            Your next unforgettable mystery starts here.
+        </p>
+
+        <div class="hero-actions">
+            <a href="{{ url_for('library') }}" class="button button-primary">
+                Explore Stories
+            </a>
+
+            <form action="{{ url_for('new_story') }}" method="POST">
+                <button class="button button-secondary" type="submit">
+                    Create a Story
+                </button>
+            </form>
+        </div>
+
+        <div class="hero-note">
+            <span class="hero-note-line"></span>
+            <span>CREATE · DISCOVER · DECIDE</span>
+        </div>
+    </div>
+
+    <div class="hero-decoration" aria-hidden="true">
+        <div class="mystery-orbit orbit-one"></div>
+        <div class="mystery-orbit orbit-two"></div>
+        <div class="mystery-core">?</div>
     </div>
 </section>
 
-<section class="section">
+<section class="section featured-section">
     <div class="section-heading">
         <div>
-            <p class="eyebrow">DISCOVER</p>
+            <p class="eyebrow">ENTER THE UNKNOWN</p>
             <h2>Featured Mysteries</h2>
+            <p class="section-description">
+                Every story hides a secret. Which one will you uncover?
+            </p>
         </div>
-        <a href="{{ url_for('library') }}" class="text-link">View all stories →</a>
+
+        <a href="{{ url_for('library') }}" class="text-link">
+            View all stories →
+        </a>
     </div>
 
     <div class="story-grid">
         {% for story in stories %}
         <article class="story-card">
-            <div class="card-symbol">CASE {{ loop.index }}</div>
+            <div class="card-top">
+                <span class="card-symbol">CASE {{ loop.index }}</span>
+                <span class="card-dot"></span>
+            </div>
+
             <h3>{{ story.title }}</h3>
+
             <p>{{ story.description }}</p>
-            <a href="{{ url_for('play_story', story_id=story.id) }}" class="text-link">Read Story →</a>
+
+            <a href="{{ url_for('play_story', story_id=story.id) }}" class="text-link">
+                Investigate Case →
+            </a>
         </article>
         {% else %}
-        <p class="empty-message">No stories yet. Create your first mystery!</p>
+        <div class="empty-state">
+            <div class="empty-symbol">?</div>
+            <h3>Your first mystery awaits.</h3>
+            <p>There are no stories in the archive yet. Create one and begin your adventure.</p>
+            <form action="{{ url_for('new_story') }}" method="POST">
+                <button class="button button-primary" type="submit">
+                    Create Your First Story
+                </button>
+            </form>
+        </div>
         {% endfor %}
     </div>
 </section>
