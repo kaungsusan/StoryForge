@@ -4,32 +4,86 @@
 {% block title %}StoryForge | Editor{% endblock %}
 
 {% block content %}
-<section class="page-heading">
-    <p class="eyebrow">STORY WORKSHOP</p>
-    <h1>Story Editor</h1>
-    <p>Build your mystery one scene at a time.</p>
+<section class="editor-heading">
+    <div>
+        <p class="eyebrow">THE STORY WORKSHOP</p>
+        <h1>Bring Your Mystery to Life.</h1>
+        <p>Build your world, create your scenes, and decide how the story unfolds.</p>
+    </div>
+
+    <div class="editor-heading-symbol" aria-hidden="true">✦</div>
 </section>
 
 <section class="editor-panel">
     <input type="hidden" id="story-id" value="{{ story.id }}">
 
-    <label for="story-title">Story Title</label>
-    <input type="text" id="story-title" value="{{ story.title }}">
+    <div class="editor-section-heading">
+        <span class="editor-step">01</span>
+        <div>
+            <h2>Story Details</h2>
+            <p>Give your mystery its identity.</p>
+        </div>
+    </div>
 
-    <label for="story-description">Description</label>
-    <textarea id="story-description" rows="3">{{ story.description }}</textarea>
+    <div class="story-details-form">
+        <div class="editor-field">
+            <label for="story-title">Story Title</label>
+            <input
+                type="text"
+                id="story-title"
+                value="{{ story.title }}"
+                placeholder="Enter your story title"
+            >
+        </div>
 
-    <div class="section-heading">
-        <h2>Scenes</h2>
-        <button type="button" class="button button-secondary" id="add-scene">+ Add Scene</button>
+        <div class="editor-field">
+            <label for="story-description">Description</label>
+            <textarea
+                id="story-description"
+                rows="3"
+                placeholder="Write a short introduction to your mystery..."
+            >{{ story.description }}</textarea>
+        </div>
+    </div>
+
+    <div class="editor-divider"></div>
+
+    <div class="editor-section-heading scenes-heading">
+        <span class="editor-step">02</span>
+        <div>
+            <h2>Your Scenes</h2>
+            <p>Each scene is another step in your mystery.</p>
+        </div>
+
+        <button type="button" class="button button-secondary" id="add-scene">
+            + Add Scene
+        </button>
     </div>
 
     <div id="scene-list"></div>
 
+    <div class="editor-divider"></div>
+
+    <div class="editor-section-heading">
+        <span class="editor-step">03</span>
+        <div>
+            <h2>Finish Your Story</h2>
+            <p>Save your work, check its structure, or play your mystery.</p>
+        </div>
+    </div>
+
     <div class="editor-actions">
-        <button type="button" class="button button-primary" id="save-story">Save Story</button>
-        <button type="button" class="button button-secondary" id="validate-story">Check Story</button>
-        <a href="{{ url_for('play_story', story_id=story.id) }}" class="button button-secondary">Play Story</a>
+        <button type="button" class="button button-primary" id="save-story">
+            Save Story
+        </button>
+
+        <button type="button" class="button button-secondary" id="validate-story">
+            Check Story
+        </button>
+
+        <a href="{{ url_for('play_story', story_id=story.id) }}" class="button button-secondary">
+            Play Story →
+        </a>
     </div>
 
     <div id="editor-message" class="message" aria-live="polite"></div>

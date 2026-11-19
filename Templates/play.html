@@ -4,30 +4,70 @@
 {% block title %}StoryForge | {{ story.title }}{% endblock %}
 
 {% block content %}
-<section class="page-heading">
-    <p class="eyebrow">INTERACTIVE MYSTERY</p>
+<section class="player-heading">
+    <p class="eyebrow">THE CASE BEGINS</p>
     <h1>{{ story.title }}</h1>
     <p>{{ story.description }}</p>
+
+    <div class="player-heading-decoration">
+        <span>STORYFORGE</span>
+        <span class="decoration-star">✦</span>
+        <span>INTERACTIVE MYSTERY</span>
+    </div>
 </section>
 
-
 <section class="play-panel">
+
     <div id="resume-prompt" class="resume-prompt" hidden>
+        <div class="resume-symbol">↻</div>
         <h2>Welcome Back, Detective</h2>
-        <p>We found your previous reading progress.</p>
+        <p>We found your previous reading progress. Would you like to continue where you left off?</p>
+
         <div class="hero-actions">
-            <button type="button" id="resume-progress" class="button button-primary">Continue Reading</button>
-            <button type="button" id="start-over" class="button button-secondary">Start Over</button>
+            <button type="button" id="resume-progress" class="button button-primary">
+                Continue Reading
+            </button>
+
+            <button type="button" id="start-over" class="button button-secondary">
+                Start Over
+            </button>
         </div>
     </div>
 
-    <div class="scene-number" id="scene-number"></div>
-    <h2 id="scene-title"></h2>
-    <p id="scene-text"></p>
-    <div id="scene-choices" class="choice-list"></div>
-    <button type="button" id="restart-story" class="button button-secondary">Restart Story</button>
-</section>
+    <div class="reading-container">
+        <div class="reading-label">
+            <span class="reading-dot"></span>
+            <span>CASE FILE</span>
+        </div>
 
+        <div class="scene-number" id="scene-number"></div>
+
+        <h2 id="scene-title"></h2>
+
+        <div class="reading-divider">
+            <span>✦</span>
+        </div>
+
+        <p id="scene-text"></p>
+
+        <div class="choice-section">
+            <div class="choice-heading">
+                <span class="eyebrow">YOUR NEXT MOVE</span>
+            </div>
+
+            <div id="scene-choices" class="choice-list"></div>
+        </div>
+    </div>
+
+    <div class="player-footer">
+        <span>EVERY CHOICE CHANGES THE STORY</span>
+
+        <button type="button" id="restart-story" class="button button-secondary">
+            ↻ Restart Story
+        </button>
+    </div>
+
+</section>
 
 <script id="play-story-data" type="application/json">{{ story|tojson }}</script>
 {% endblock %}

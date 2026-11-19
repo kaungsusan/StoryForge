@@ -1,0 +1,14 @@
+{
+    "id": "77ce093c",
+    "title": "Untitled Mystery",
+    "description": "A new mystery waiting to be written.",
+    "start_scene": "start",
+    "scenes": {
+        "start": {
+            "title": "The Beginning",
+            "text": "Your mystery begins here.",
+            "choices": [],
+            "ending": true
+        }
+    }
+}
