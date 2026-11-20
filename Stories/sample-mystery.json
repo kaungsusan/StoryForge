@@ -1,0 +1,225 @@
+{
+    "description": "A detective investigates the mysterious disappearance of Lord Blackwood at an isolated mansion, uncovering hidden passages, secret letters, and a dangerous family secret.",
+    "id": "sample-mystery",
+    "scenes": {
+        "arrival": {
+            "choices": [
+                {
+                    "label": "Examine the library",
+                    "target_scene": "library"
+                },
+                {
+                    "label": "Inspect the hallway",
+                    "target_scene": "hallway"
+                }
+            ],
+            "ending": false,
+            "text": "Rain crashes against the windows of Blackwood Manor. You have been called to investigate the disappearance of Lord Blackwood, who vanished without a trace three nights ago. The front door is unlocked, and the house is strangely silent. A grandfather clock ticks somewhere upstairs. You notice two possible places to investigate.",
+            "title": "The Arrival"
+        },
+        "caretaker": {
+            "choices": [
+                {
+                    "label": "Demand to know who threatened Lord Blackwood",
+                    "target_scene": "reveal"
+                },
+                {
+                    "label": "Accuse the caretaker of helping him escape",
+                    "target_scene": "reveal"
+                }
+            ],
+            "ending": false,
+            "text": "You find the caretaker in the kitchen. When you show him the photograph and the letter, his expression changes. After a long silence, he admits that Lord Blackwood planned his disappearance. However, he insists that the plan was not simply about escaping debt. Someone had threatened Lord Blackwood, and the caretaker helped him vanish to protect his life.",
+            "title": "The Caretaker's Confession"
+        },
+        "conservatory": {
+            "choices": [
+                {
+                    "label": "Investigate the garden outside",
+                    "target_scene": "garden"
+                },
+                {
+                    "label": "Examine the glove more closely",
+                    "target_scene": "portrait"
+                }
+            ],
+            "ending": false,
+            "text": "The glass conservatory is cold and filled with dying plants. A small table holds two empty teacups. One cup contains traces of a bitter-smelling liquid. Beneath a flowerpot, you discover a muddy glove with the initials B.B. embroidered inside.",
+            "title": "The Conservatory"
+        },
+        "desk": {
+            "choices": [
+                {
+                    "label": "Read the letter carefully",
+                    "target_scene": "letter"
+                },
+                {
+                    "label": "Return to the library",
+                    "target_scene": "library"
+                }
+            ],
+            "ending": false,
+            "text": "You carefully examine the desk and discover a hidden compartment. Inside is a sealed letter bearing Lord Blackwood's signature. The letter mentions a meeting with someone who knows the truth about his disappearance. It is addressed to the caretaker.",
+            "title": "The Hidden Desk Compartment"
+        },
+        "ending_pursuit": {
+            "choices": [],
+            "ending": true,
+            "text": "You follow the train ticket to the station and discover that Lord Blackwood has already boarded a train. You manage to catch a glimpse of him through the window. Before the train disappears into the night, he leaves a final message: 'Some secrets are better left behind.' You have solved the disappearance, but the larger mystery remains unsolved. Your investigation is far from over.",
+            "title": "Ending: The Detective's Pursuit"
+        },
+        "ending_secret": {
+            "choices": [],
+            "ending": true,
+            "text": "You decide to protect the caretaker and Lord Blackwood. Before sunrise, the caretaker burns the remaining documents, and the manor becomes silent once more. The official investigation is eventually closed. Lord Blackwood disappears into a new life, but you know that the truth remains buried beneath the roses.",
+            "title": "Ending: The Secret Kept"
+        },
+        "ending_truth": {
+            "choices": [],
+            "ending": true,
+            "text": "You report your findings to the police. The investigation exposes the financial crimes within the Blackwood family. Lord Blackwood is eventually located and brought back to answer questions. The caretaker is questioned but cooperates with the authorities. The mystery is solved, and justice is served. However, Blackwood Manor will never be the same.",
+            "title": "Ending: The Truth Revealed"
+        },
+        "garden": {
+            "choices": [
+                {
+                    "label": "Take the photograph to the caretaker",
+                    "target_scene": "caretaker"
+                },
+                {
+                    "label": "Investigate the nearby greenhouse",
+                    "target_scene": "observatory"
+                }
+            ],
+            "ending": false,
+            "text": "You step into the rain-soaked garden. Beneath the oldest rose bush, the earth appears freshly disturbed. You dig carefully and uncover a small metal box. Inside is a photograph of Lord Blackwood standing beside the caretaker, dated the night he disappeared.",
+            "title": "The Rose Garden"
+        },
+        "hallway": {
+            "choices": [
+                {
+                    "label": "Use the silver key on the locked room",
+                    "target_scene": "locked_room"
+                },
+                {
+                    "label": "Investigate the conservatory",
+                    "target_scene": "conservatory"
+                }
+            ],
+            "ending": false,
+            "text": "A muddy footprint leads toward a locked room. Nearby, you find a silver key hidden beneath a small table. The footprint appears fresh, even though the caretaker insists nobody has entered the manor since Lord Blackwood disappeared. A glass conservatory stands at the end of the corridor.",
+            "title": "The Hallway"
+        },
+        "letter": {
+            "choices": [
+                {
+                    "label": "Confront the caretaker",
+                    "target_scene": "caretaker"
+                },
+                {
+                    "label": "Follow the garden clue first",
+                    "target_scene": "garden"
+                }
+            ],
+            "ending": false,
+            "text": "The letter reveals that Lord Blackwood planned to leave the estate before midnight. He feared that someone in the family was trying to take control of his fortune. The final sentence reads: 'Trust no one who claims to have seen me leave.'",
+            "title": "The Caretaker's Letter"
+        },
+        "library": {
+            "choices": [
+                {
+                    "label": "Search the desk",
+                    "target_scene": "desk"
+                },
+                {
+                    "label": "Examine the strange portrait",
+                    "target_scene": "portrait"
+                }
+            ],
+            "ending": false,
+            "text": "The library smells of smoke and old books. A fireplace is still warm, although nobody has been seen in the house for days. Beneath a desk, you discover a torn piece of paper containing a message: 'Meet me at midnight. Come alone.' A strange portrait hangs crookedly above the fireplace.",
+            "title": "The Library"
+        },
+        "locked_room": {
+            "choices": [
+                {
+                    "label": "Follow the clue to the garden",
+                    "target_scene": "garden"
+                },
+                {
+                    "label": "Search for another way out",
+                    "target_scene": "passage"
+                }
+            ],
+            "ending": false,
+            "text": "The silver key opens the door. Inside, you discover a broken window, a muddy coat, and a chair knocked onto its side. A note on the floor reads: 'The truth is buried where the roses grow.' The room appears to have been abandoned in a hurry.",
+            "title": "The Locked Room"
+        },
+        "observatory": {
+            "choices": [
+                {
+                    "label": "Confront the caretaker with the evidence",
+                    "target_scene": "caretaker"
+                },
+                {
+                    "label": "Search the bag for another clue",
+                    "target_scene": "letter"
+                }
+            ],
+            "ending": false,
+            "text": "Inside the greenhouse, you discover a hidden travel bag containing money, a passport, and a train ticket dated three nights ago. The ticket belongs to Lord Blackwood. Someone clearly prepared his escape in advance.",
+            "title": "The Old Greenhouse"
+        },
+        "passage": {
+            "choices": [
+                {
+                    "label": "Open the wooden door",
+                    "target_scene": "caretaker"
+                },
+                {
+                    "label": "Return to the locked room",
+                    "target_scene": "locked_room"
+                }
+            ],
+            "ending": false,
+            "text": "Behind the portrait, a narrow passage descends into darkness. The walls are covered in dust, but fresh footprints lead deeper inside. At the end, you find a small wooden door and a second set of footprints leading back toward the main house.",
+            "title": "The Hidden Passage"
+        },
+        "portrait": {
+            "choices": [
+                {
+                    "label": "Pull the hidden handle",
+                    "target_scene": "passage"
+                },
+                {
+                    "label": "Return to the hallway",
+                    "target_scene": "hallway"
+                }
+            ],
+            "ending": false,
+            "text": "You examine the portrait of Lord Blackwood's family. Something seems wrong. The painting is slightly tilted, and the wall behind it sounds hollow. When you move the portrait, you discover a small metal handle hidden behind the frame.",
+            "title": "The Family Portrait"
+        },
+        "reveal": {
+            "choices": [
+                {
+                    "label": "Report everything to the police",
+                    "target_scene": "ending_truth"
+                },
+                {
+                    "label": "Protect Lord Blackwood and keep the secret",
+                    "target_scene": "ending_secret"
+                },
+                {
+                    "label": "Follow the train ticket and search for Lord Blackwood",
+                    "target_scene": "ending_pursuit"
+                }
+            ],
+            "ending": false,
+            "text": "The caretaker finally reveals the truth. Lord Blackwood discovered that a member of his family had been secretly stealing money from the estate. When he threatened to expose the crime, he received a warning that his life was in danger. The caretaker helped him escape before the family could silence him. Now you must decide what to do with the truth.",
+            "title": "The Final Revelation"
+        }
+    },
+    "start_scene": "arrival",
+    "title": "The Last Night at Blackwood Manor"
+}

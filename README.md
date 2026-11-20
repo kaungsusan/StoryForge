@@ -161,10 +161,6 @@ Reading progress is stored locally in the user's browser using Local Storage.
 - Introduce additional story customization options.
 - Add user accounts and online story storage.
 
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
 ## Author
 
 Developed as an individual Open Source Software course project.
