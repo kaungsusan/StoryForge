@@ -60,7 +60,7 @@ The project combines creative storytelling with interactive web development usin
 ### 1. Clone the repository
 
 ```bash
-git https://github.com/kaungsusan/StoryForge.git
+git clone https://github.com/kaungsusan/StoryForge.git
 ```
 
 ### 2. Open the project folder
@@ -118,7 +118,6 @@ StoryForge/
 ├── app.py
 ├── story_engine.py
 ├── README.md
-├── LICENSE
 │
 ├── stories/
 │   ├── sample-mystery.json
