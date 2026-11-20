@@ -331,7 +331,13 @@ function initializePlayer() {
         return;
     }
 
-    if (!story || !story.id || !story.scenes || !story.start_scene) {
+    if (
+        !story ||
+        !story.id ||
+        !story.scenes ||
+        !story.start_scene ||
+        !story.scenes[story.start_scene]
+    ) {
         console.error("Story data is incomplete.");
         return;
     }
@@ -361,14 +367,27 @@ function initializePlayer() {
     let currentScene = story.start_scene;
     let visitedScenes = [];
 
+    function readProgress() {
+        try {
+            const saved = localStorage.getItem(progressKey);
+            return saved ? JSON.parse(saved) : null;
+        } catch (error) {
+            return null;
+        }
+    }
+
     function saveProgress() {
-        localStorage.setItem(
-            progressKey,
-            JSON.stringify({
-                current_scene: currentScene,
-                visited_scenes: visitedScenes
-            })
-        );
+        try {
+            localStorage.setItem(
+                progressKey,
+                JSON.stringify({
+                    current_scene: currentScene,
+                    visited_scenes: visitedScenes
+                })
+            );
+        } catch (error) {
+            console.warn("Reading progress could not be saved:", error);
+        }
     }
 
     function showScene(sceneId) {
@@ -385,40 +404,57 @@ function initializePlayer() {
         currentScene = sceneId;
         visitedScenes.push(sceneId);
 
-        saveProgress();
-
         numberElement.textContent = `SCENE ${visitedScenes.length}`;
-        titleElement.textContent = scene.title;
-        textElement.textContent = scene.text;
+        titleElement.textContent = scene.title || "Untitled Scene";
+        textElement.textContent = scene.text || "";
         choicesElement.replaceChildren();
 
         if (scene.ending) {
             choicesElement.appendChild(
                 createElement("p", "ending-message", "THE END")
             );
-            return;
+        } else {
+            (scene.choices || []).forEach(choice => {
+                const button = createElement(
+                    "button",
+                    "choice-button",
+                    choice.label || "Continue"
+                );
+
+                button.type = "button";
+
+                button.addEventListener("click", () => {
+                    if (!story.scenes[choice.target_scene]) {
+                        titleElement.textContent = "Scene not found";
+                        textElement.textContent =
+                            "The next scene could not be found.";
+                        choicesElement.replaceChildren();
+                        return;
+                    }
+
+                    showScene(choice.target_scene);
+                });
+
+                choicesElement.appendChild(button);
+            });
         }
 
-        (scene.choices || []).forEach(choice => {
-            const button = createElement(
-                "button",
-                "choice-button",
-                choice.label
-            );
+        saveProgress();
+    }
 
-            button.type = "button";
-
-            button.addEventListener("click", () => {
-                showScene(choice.target_scene);
-            });
-
-            choicesElement.appendChild(button);
-        });
+    function clearProgress() {
+        try {
+            localStorage.removeItem(progressKey);
+        } catch (error) {
+            console.warn("Previous reading progress could not be cleared:", error);
+        }
     }
 
     function startStory() {
+        clearProgress();
+
+        currentScene = story.start_scene;
         visitedScenes = [];
-        localStorage.removeItem(progressKey);
 
         if (resumePrompt) {
             resumePrompt.hidden = true;
@@ -428,15 +464,7 @@ function initializePlayer() {
     }
 
     function resumeStory() {
-        let savedProgress = null;
-
-        try {
-            savedProgress = JSON.parse(
-                localStorage.getItem(progressKey)
-            );
-        } catch (error) {
-            localStorage.removeItem(progressKey);
-        }
+        const savedProgress = readProgress();
 
         if (
             savedProgress &&
@@ -474,15 +502,7 @@ function initializePlayer() {
         resumeButton.addEventListener("click", resumeStory);
     }
 
-    let savedProgress = null;
-
-    try {
-        savedProgress = JSON.parse(
-            localStorage.getItem(progressKey)
-        );
-    } catch (error) {
-        localStorage.removeItem(progressKey);
-    }
+    const savedProgress = readProgress();
 
     if (
         savedProgress &&

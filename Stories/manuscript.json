@@ -1,0 +1,162 @@
+
+{
+    "id": "missing-manuscript",
+    "title": "The Missing Manuscript",
+    "description": "A priceless historical manuscript disappears from a university library. Investigate the suspects, uncover hidden motives, and discover the truth before the exhibition begins.",
+    "start_scene": "discovery",
+    "scenes": {
+        "discovery": {
+            "title": "The Empty Display Case",
+            "text": "It is 8:00 AM at Westbridge University. The annual exhibition is scheduled to begin in two hours, but the most valuable item is missing: the original manuscript of The Forgotten Kingdom. The display case is locked, the security alarm was never triggered, and the librarian insists that the manuscript was there last night. You have been asked to investigate before the university announces the theft.",
+            "choices": [
+                {"label": "Inspect the display case", "target_scene": "display_case"},
+                {"label": "Question the librarian", "target_scene": "librarian"}
+            ],
+            "ending": false
+        },
+        "display_case": {
+            "title": "The Broken Seal",
+            "text": "The display case appears undamaged, but the security seal has been carefully removed. You discover a tiny piece of blue fabric caught beneath the glass and a faint fingerprint on the lock.",
+            "choices": [
+                {"label": "Examine the blue fabric", "target_scene": "fabric"},
+                {"label": "Inspect the fingerprint", "target_scene": "fingerprint"}
+            ],
+            "ending": false
+        },
+        "librarian": {
+            "title": "The Librarian's Statement",
+            "text": "The librarian, Mrs. Eleanor Grey, says she locked the library at 9:00 PM. She claims only three people had permission to access the manuscript: Professor Hale, research assistant Daniel, and herself. However, she seems nervous when you mention the security system.",
+            "choices": [
+                {"label": "Question Professor Hale", "target_scene": "professor"},
+                {"label": "Find Daniel", "target_scene": "assistant"}
+            ],
+            "ending": false
+        },
+        "fabric": {
+            "title": "A Blue Thread",
+            "text": "The fabric matches the material used in the university's staff uniforms. You learn that several employees wore blue jackets during last night's preparations. One of them was seen leaving the library shortly before closing time.",
+            "choices": [
+                {"label": "Check the staff records", "target_scene": "records"},
+                {"label": "Question the professor", "target_scene": "professor"}
+            ],
+            "ending": false
+        },
+        "fingerprint": {
+            "title": "The Fingerprint",
+            "text": "The fingerprint does not belong to the librarian. A university security officer checks the staff records and identifies a possible match: Daniel, the research assistant. However, the officer warns you that fingerprints alone do not prove who stole the manuscript.",
+            "choices": [
+                {"label": "Question Daniel", "target_scene": "assistant"},
+                {"label": "Search Daniel's desk", "target_scene": "desk"}
+            ],
+            "ending": false
+        },
+        "professor": {
+            "title": "Professor Hale",
+            "text": "Professor Hale insists that he left the university at 7:00 PM. He says the manuscript is extremely important to his research and that he would never risk damaging it. When you ask about the exhibition, he mentions that the manuscript contains a secret passage of historical text that has never been translated.",
+            "choices": [
+                {"label": "Ask about the secret text", "target_scene": "translation"},
+                {"label": "Check his office", "target_scene": "office"}
+            ],
+            "ending": false
+        },
+        "assistant": {
+            "title": "Daniel's Alibi",
+            "text": "Daniel looks exhausted. He admits that he worked late but says he was organizing documents in another building. He also reveals that Professor Hale had been arguing with the librarian about who should receive credit for discovering the manuscript's hidden meaning.",
+            "choices": [
+                {"label": "Inspect Daniel's desk", "target_scene": "desk"},
+                {"label": "Investigate the argument", "target_scene": "office"}
+            ],
+            "ending": false
+        },
+        "records": {
+            "title": "The Staff Records",
+            "text": "The staff records show that a maintenance worker named Victor was assigned to the library that evening. His uniform was blue, and his access card was used after the library officially closed. However, his name does not appear on the list of people authorized to handle the manuscript.",
+            "choices": [
+                {"label": "Find Victor", "target_scene": "victor"},
+                {"label": "Check the access card records", "target_scene": "security"}
+            ],
+            "ending": false
+        },
+        "desk": {
+            "title": "Daniel's Desk",
+            "text": "Inside Daniel's desk, you find a handwritten translation of several pages from the missing manuscript. The final paragraph is unfinished. A note beside it reads: 'Professor Hale must not discover what the final page says.'",
+            "choices": [
+                {"label": "Ask Daniel about the translation", "target_scene": "translation"},
+                {"label": "Take the note to Professor Hale", "target_scene": "office"}
+            ],
+            "ending": false
+        },
+        "office": {
+            "title": "The Professor's Office",
+            "text": "Professor Hale's office contains books about ancient kingdoms and several photographs of the manuscript. Hidden inside a drawer, you discover a letter requesting that the manuscript be sold to a private collector. The letter is signed by the professor, but the date is from three months ago.",
+            "choices": [
+                {"label": "Confront Professor Hale", "target_scene": "translation"},
+                {"label": "Investigate the private collector", "target_scene": "records"}
+            ],
+            "ending": false
+        },
+        "translation": {
+            "title": "The Hidden Message",
+            "text": "After comparing the translations, you discover that the manuscript describes the location of a hidden historical archive. Professor Hale wanted to claim the discovery for himself, while Daniel believed the information should be made public. The manuscript may have been taken to prevent either person from controlling the discovery.",
+            "choices": [
+                {"label": "Question Victor about the manuscript", "target_scene": "victor"},
+                {"label": "Check the university security room", "target_scene": "security"}
+            ],
+            "ending": false
+        },
+        "victor": {
+            "title": "The Maintenance Worker",
+            "text": "Victor admits that he entered the library after closing, but says he was repairing a damaged light. He noticed someone carrying a large leather folder toward the basement. He did not report it because he feared losing his job. He remembers seeing a distinctive silver ring on that person's hand.",
+            "choices": [
+                {"label": "Search the basement", "target_scene": "basement"},
+                {"label": "Compare the silver ring with the suspects", "target_scene": "security"}
+            ],
+            "ending": false
+        },
+        "security": {
+            "title": "The Security Room",
+            "text": "The security recordings show that the alarm was disabled for exactly six minutes. The person who disabled it used a university administrator's access code. The recording is incomplete, but you can see the person wearing a silver ring and carrying a leather folder.",
+            "choices": [
+                {"label": "Search the basement for the folder", "target_scene": "basement"},
+                {"label": "Confront the librarian with the recording", "target_scene": "final_revelation"}
+            ],
+            "ending": false
+        },
+        "basement": {
+            "title": "The Hidden Basement Room",
+            "text": "Behind a shelf in the basement, you discover a locked storage room. Inside is the missing manuscript, wrapped carefully in cloth. You also find a letter explaining that the theft was arranged to stop the manuscript from being sold to a private collector. Someone wanted to protect the discovery, but their actions put the entire exhibition at risk.",
+            "choices": [
+                {"label": "Confront everyone with the evidence", "target_scene": "final_revelation"}
+            ],
+            "ending": false
+        },
+        "final_revelation": {
+            "title": "The Final Revelation",
+            "text": "You gather the suspects and reveal your findings. The librarian finally confesses that she moved the manuscript to the basement. She discovered the professor's plan to sell it and feared the university would lose its most valuable historical treasure. Daniel helped her translate the manuscript but did not know where she had hidden it. The librarian asks you to decide how the truth should be handled.",
+            "choices": [
+                {"label": "Expose the theft and report everyone involved", "target_scene": "ending_exposed"},
+                {"label": "Protect the librarian's actions", "target_scene": "ending_protected"},
+                {"label": "Reveal the discovery but keep the manuscript's location secret", "target_scene": "ending_secret"}
+            ],
+            "ending": false
+        },
+        "ending_exposed": {
+            "title": "Ending: Justice at Westbridge",
+            "text": "You report the theft and present all the evidence. The librarian is dismissed, Professor Hale faces an investigation into his attempt to sell the manuscript, and Daniel is cleared of stealing it. The manuscript is returned to the university, and the exhibition opens under strict security. The truth is public, but the university's reputation is damaged.",
+            "choices": [],
+            "ending": true
+        },
+        "ending_protected": {
+            "title": "Ending: A Quiet Rescue",
+            "text": "You decide that the librarian acted to protect the manuscript from being sold. You help her explain the situation privately to the university director. Professor Hale loses his authority over the collection, and the manuscript remains at Westbridge. The public never learns how close the university came to losing it.",
+            "choices": [],
+            "ending": true
+        },
+        "ending_secret": {
+            "title": "Ending: The Forgotten Discovery",
+            "text": "You reveal the professor's plans but keep the librarian's role and the manuscript's location secret. The university cancels the exhibition, claiming the manuscript needs further preservation. Its hidden message remains undisclosed, and the location of the ancient archive is never made public. You leave knowing that some discoveries are better left buried.",
+            "choices": [],
+            "ending": true
+        }
+    }
+}

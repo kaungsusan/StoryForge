@@ -1,0 +1,155 @@
+
+{
+    "id": "11-47-train",
+    "title": "The 11:47 Train",
+    "description": "A passenger disappears from a locked compartment during a mysterious midnight train journey. Investigate the clues before the train reaches its final destination.",
+    "start_scene": "boarding",
+    "scenes": {
+        "boarding": {
+            "title": "The Last Departure",
+            "text": "The station clock reads 11:40 PM. You board the last train heading toward Northbridge. The rain is getting heavier, and only a handful of passengers are aboard. As the train begins moving, a conductor approaches you with an unusual request. A passenger named Mr. Adrian Vale has disappeared from compartment 7, which was locked from the inside.",
+            "choices": [
+                {"label": "Investigate compartment 7", "target_scene": "compartment"},
+                {"label": "Question the conductor", "target_scene": "conductor"}
+            ],
+            "ending": false
+        },
+        "compartment": {
+            "title": "The Locked Compartment",
+            "text": "Compartment 7 is empty. The window is closed, the door lock appears undamaged, and a cup of tea sits untouched on the table. You notice a small amount of mud near the window and a torn ticket beneath the seat.",
+            "choices": [
+                {"label": "Examine the torn ticket", "target_scene": "ticket"},
+                {"label": "Inspect the window", "target_scene": "window"}
+            ],
+            "ending": false
+        },
+        "conductor": {
+            "title": "The Nervous Conductor",
+            "text": "The conductor introduces himself as Thomas Reed. He explains that Adrian Vale boarded alone and seemed frightened. However, Reed becomes uncomfortable when you ask about the missing passenger. He insists that nobody entered or left compartment 7.",
+            "choices": [
+                {"label": "Ask about the other passengers", "target_scene": "passengers"},
+                {"label": "Search the conductor's office", "target_scene": "office"}
+            ],
+            "ending": false
+        },
+        "ticket": {
+            "title": "The Torn Ticket",
+            "text": "The ticket is dated for tomorrow, not tonight. On its back, someone has written: 'Do not let the train reach Northbridge.' The handwriting is shaky, as if the message was written in a hurry.",
+            "choices": [
+                {"label": "Find out who wrote the message", "target_scene": "passengers"},
+                {"label": "Return to the compartment", "target_scene": "compartment"}
+            ],
+            "ending": false
+        },
+        "window": {
+            "title": "The Impossible Window",
+            "text": "You inspect the window carefully. Although it is locked, you notice scratches around its frame. Outside, a narrow maintenance platform runs along the train. Someone may have used it to move between compartments.",
+            "choices": [
+                {"label": "Follow the maintenance platform", "target_scene": "maintenance"},
+                {"label": "Search the nearby luggage", "target_scene": "luggage"}
+            ],
+            "ending": false
+        },
+        "passengers": {
+            "title": "The Other Passengers",
+            "text": "You question the remaining passengers. An elderly woman says she heard an argument shortly before midnight. A young man claims he saw someone wearing a railway uniform enter compartment 7. Both passengers seem to be hiding something.",
+            "choices": [
+                {"label": "Question the elderly woman", "target_scene": "woman"},
+                {"label": "Question the young man", "target_scene": "young_man"}
+            ],
+            "ending": false
+        },
+        "office": {
+            "title": "The Conductor's Office",
+            "text": "Inside the office, you discover a second passenger list. Adrian Vale's name has been crossed out, and a different name has been written beside it: Thomas Reed. You also find a key marked with the number 7.",
+            "choices": [
+                {"label": "Confront the conductor", "target_scene": "confrontation"},
+                {"label": "Use the key to search the luggage area", "target_scene": "luggage"}
+            ],
+            "ending": false
+        },
+        "maintenance": {
+            "title": "The Maintenance Platform",
+            "text": "You carefully step onto the narrow platform. A few meters away, you find a dropped button from a railway uniform and a fresh handprint on the metal railing. Someone definitely used this route.",
+            "choices": [
+                {"label": "Follow the footprints", "target_scene": "luggage"},
+                {"label": "Return and question the passengers", "target_scene": "passengers"}
+            ],
+            "ending": false
+        },
+        "luggage": {
+            "title": "The Luggage Carriage",
+            "text": "The luggage carriage is almost completely dark. Behind a stack of suitcases, you discover a hidden door leading to a small storage compartment. Inside is a briefcase containing several documents belonging to Adrian Vale.",
+            "choices": [
+                {"label": "Read the documents", "target_scene": "documents"},
+                {"label": "Search for another exit", "target_scene": "confrontation"}
+            ],
+            "ending": false
+        },
+        "woman": {
+            "title": "The Woman's Secret",
+            "text": "The elderly woman admits that Adrian Vale was carrying important documents. She says he was afraid someone aboard the train wanted to steal them. Before you can ask more, she hands you a small photograph of a railway employee.",
+            "choices": [
+                {"label": "Examine the photograph", "target_scene": "documents"},
+                {"label": "Ask about the argument", "target_scene": "confrontation"}
+            ],
+            "ending": false
+        },
+        "young_man": {
+            "title": "The Young Witness",
+            "text": "The young man finally admits that he saw the conductor leaving compartment 7 shortly after midnight. He also heard Adrian say, 'You cannot hide the truth forever.' The young man gives you a note he found near the door.",
+            "choices": [
+                {"label": "Read the note", "target_scene": "documents"},
+                {"label": "Confront the conductor", "target_scene": "confrontation"}
+            ],
+            "ending": false
+        },
+        "documents": {
+            "title": "The Missing Documents",
+            "text": "The documents reveal that Adrian Vale was investigating illegal activities involving the railway company. One page contains evidence that someone has been secretly changing passenger records and diverting valuable cargo. The signature on the final document belongs to Thomas Reed.",
+            "choices": [
+                {"label": "Take the evidence to the conductor", "target_scene": "confrontation"},
+                {"label": "Search for Adrian before reaching Northbridge", "target_scene": "rescue"}
+            ],
+            "ending": false
+        },
+        "confrontation": {
+            "title": "The Final Confrontation",
+            "text": "You confront Thomas Reed with the evidence. His expression changes immediately. He admits that Adrian discovered the railway company's secret operation. Reed helped him disappear because Adrian planned to expose the people responsible. But Reed refuses to reveal where Adrian is hiding.",
+            "choices": [
+                {"label": "Report everything to the authorities", "target_scene": "ending_exposed"},
+                {"label": "Help Adrian escape", "target_scene": "rescue"},
+                {"label": "Accept Reed's offer to stay silent", "target_scene": "ending_silence"}
+            ],
+            "ending": false
+        },
+        "rescue": {
+            "title": "The Hidden Passenger",
+            "text": "Following the clues, you discover a small maintenance compartment between two carriages. Adrian Vale is hiding inside. He explains that he arranged his disappearance to escape the people threatening him. He gives you the original documents and asks you to decide what happens next.",
+            "choices": [
+                {"label": "Deliver the evidence to the authorities", "target_scene": "ending_exposed"},
+                {"label": "Help Adrian disappear permanently", "target_scene": "ending_escape"},
+                {"label": "Return to the conductor and negotiate", "target_scene": "ending_silence"}
+            ],
+            "ending": false
+        },
+        "ending_exposed": {
+            "title": "Ending: The Truth Reaches Northbridge",
+            "text": "You deliver the evidence to the authorities at the next station. Thomas Reed is arrested, and the railway investigation becomes public. Adrian agrees to testify, and the mystery of the 11:47 train is finally solved. Your investigation uncovers a much larger criminal operation.",
+            "choices": [],
+            "ending": true
+        },
+        "ending_escape": {
+            "title": "Ending: A Passenger Disappears",
+            "text": "You help Adrian leave the train before it reaches Northbridge. He disappears into the night with the documents. Nobody ever discovers where he went. The official investigation remains unsolved, but you know you helped save an innocent man's life.",
+            "choices": [],
+            "ending": true
+        },
+        "ending_silence": {
+            "title": "Ending: The Silent Agreement",
+            "text": "You accept that some secrets are too dangerous to expose. Reed promises that Adrian will be safe, and the train continues toward Northbridge. The official report describes the disappearance as an unexplained incident. You leave the station knowing the truth but unable to reveal it.",
+            "choices": [],
+            "ending": true
+        }
+    }
+}
