@@ -114,30 +114,28 @@ A priceless historical manuscript disappears from a university library. Investig
 
 ```text
 StoryForge/
-│
 ├── app.py
 ├── story_engine.py
 ├── README.md
-│
-├── stories/
-│   ├── sample-mystery.json
-│   ├── 11-47-train.json
-│   └── missing-manuscript.json
-│
-├── templates/
-│   ├── base.html
-│   ├── index.html
-│   ├── library.html
-│   ├── editor.html
-│   ├── play.html
-│   └── 404.html
-│
-└── static/
-    ├── css/
-    │   └── style.css
-    │
-    └── js/
-        └── app.js
+├── requirements.txt
+├── .gitignore
+├── Static/
+│   ├── Css/
+│   │   └── style.css
+│   └── Js/
+│       └── app.js
+├── Stories/
+│   ├── bca791ad.json
+│   ├── blackwood.json
+│   ├── manuscript.json
+│   └── train.json
+└── Templates/
+    ├── base.html
+    ├── index.html
+    ├── library.html
+    ├── editor.html
+    ├── play.html
+    └── 404.html
 ```
 
 ## Data Storage
