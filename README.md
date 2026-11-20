@@ -125,7 +125,6 @@ StoryForge/
 │   └── Js/
 │       └── app.js
 ├── Stories/
-│   ├── bca791ad.json
 │   ├── blackwood.json
 │   ├── manuscript.json
 │   └── train.json
